@@ -1,0 +1,11 @@
+{
+    "name": "ember_tutorial",
+    "dependencies": {
+        "ember-data": "1.0.0-beta.8",
+        "ember": "1.6.0",
+        "jquery": "*",
+        "bootstrap": "*",
+        "qunit": "*",
+        "ember-localstorage-adapter": "*"
+    }
+}
