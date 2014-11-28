@@ -1,0 +1,5 @@
+<h1>Workout:</h1>
+{% for workout in log.workouts.all %}
+Workout: {{ workout.name_of_workout }}<br>
+Reps: {{ workout.reps }}<br>
+{% endfor %}

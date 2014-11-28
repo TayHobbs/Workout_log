@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <title>Workout Logger</title>
+<body>
+<h1>Workout Logger</h1>
+
+{% if user.is_authenticated %}
+<p>You are already logged in!</p>
+<button><a href="{% url 'logout' %}">Logout</a></button>
+<button><a href="{% url 'logs' %}">Logs</a></button>
+{% else %}
+<button><a href="{% url 'login' %}">Register</a></button>
+<a href="{% url 'login' %}">Login</a>
+{% endif %}
+
+  </body>
+</html>
