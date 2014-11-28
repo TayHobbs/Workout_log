@@ -16,7 +16,7 @@ class Workout(models.Model):
 
 class Log(models.Model):
     date = models.DateField(auto_now=True)
-    # name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30)
     workouts = models.ManyToManyField(Workout)
 
     @classmethod
