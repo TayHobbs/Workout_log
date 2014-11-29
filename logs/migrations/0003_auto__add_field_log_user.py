@@ -10,9 +10,9 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'Log.user'
         from django.contrib.auth.models import User
-        taylor = User.objects.get(username="taylor.hobbs")
+        test_user = User.objects.create(username="test")
         db.add_column(u'logs_log', 'user',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=taylor.pk, to=orm['auth.User']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=test_user.pk, to=orm['auth.User']),
                       keep_default=False)
 
 

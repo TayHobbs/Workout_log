@@ -15,8 +15,11 @@ def index(request):
 
 
 def logs(request):
-    logs = Log.objects.all()
-    return render(request, 'logs/logs.html', {'logs': logs})
+    if request.user.is_authenticated():
+        logs = Log.objects.all()
+        return render(request, 'logs/logs.html', {'logs': logs})
+    else:
+        return HttpResponse("You are not signed in")
 
 
 def signup(request):
@@ -51,7 +54,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/logs')
             else:
                 return HttpResponse("Your account is disabled")
         else:
@@ -62,13 +65,15 @@ def user_login(request):
 
 
 def detail(request, log_id):
-    log = Log.objects.get(pk=log_id)
-    return render(request, 'logs/detail.html', {'log': log})
+    if request.user.is_authenticated():
+        log = Log.objects.get(pk=log_id)
+        return render(request, 'logs/detail.html', {'log': log})
+    else:
+        return HttpResponseRedirect('/')
 
 
 def create(request):
     user = request.user
-    print user
     workout = Workout.create(request.POST['workout'], request.POST['reps'])
     workout.save()
     log = Log.objects.create(user=user, name=request.POST['log'])
