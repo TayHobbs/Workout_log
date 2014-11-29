@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Workout(models.Model):
@@ -18,8 +19,7 @@ class Log(models.Model):
     date = models.DateField(auto_now=True)
     name = models.CharField(max_length=30)
     workouts = models.ManyToManyField(Workout)
+    user = models.ForeignKey(User)
 
-    @classmethod
-    def create(cls):
-        log = cls()
-        return log
+    def __unicode__(self):
+        return self.name

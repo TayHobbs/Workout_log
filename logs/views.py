@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from logs.forms import UserForm
@@ -65,10 +66,12 @@ def detail(request, log_id):
     return render(request, 'logs/detail.html', {'log': log})
 
 
-def create(request, log_id):
+def create(request):
+    user = request.user
+    print user
     workout = Workout.create(request.POST['workout'], request.POST['reps'])
     workout.save()
-    log = Log.objects.create()
+    log = Log.objects.create(user=user, name=request.POST['log'])
     log.workouts.add(workout)
     return HttpResponseRedirect(reverse('logs'))
 

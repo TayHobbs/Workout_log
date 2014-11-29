@@ -5,18 +5,17 @@
     Logs:
     <ul>
       {% for log in logs %}
-        <li><a href="{% url 'detail' log.id %}">{{ log.date }}</a></li>
+      <li><a href="{% url 'detail' log.id %}">{{ log.name }} - {{ log.date }}</a></li>
       {% endfor %}
     </ul>
 
-    <h3>Record a new workout:</h3>
-    {% for log in logs %}
-      <form action="{% url 'create' log.id %}" method="post">
-    {% endfor %}
+    <h3>Record a new Log:</h3>
+      <form action="/create/" method="post">
       {% csrf_token %}
+      <input type="text" name="log" value="{{ log.name }}" />
       <input type="text" name="workout" value="{{ workout.name_of_workout }}" />
       <input type="text" name="reps" value="{{ workout.reps }}" />
-      <input type="submit" value="create" />
+      <input type="submit" name="submit" value="Create" />
     </form>
 
     <a href="{% url 'logout' %}">Logout</a>
