@@ -2,7 +2,7 @@
 {% block body_block %}
 <h1>Workout:</h1>
 {% for workout in log.workouts.all %}
-Workout: {{ workout.name_of_workout }}<br>
+Workout: {{ workout.name }}<br>
 Reps: {{ workout.reps }}<br>
 {% endfor %}
 
@@ -10,7 +10,7 @@ Reps: {{ workout.reps }}<br>
   {% csrf_token %}
   <input name='log' value="{{ log.id }}" class="hidden"/>
   Workout Name:
-  <input type="text" name="workout" value="{{ workout.name_of_workout }}" />
+  <input type="text" name="workout" value="{{ workout.name }}" />
   Reps:
   <input type="text" name="reps" value="{{ workout.reps }}" />
   <input class="btn btn-primary" type="submit" name="submit" value="Create New Log" />

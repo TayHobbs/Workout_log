@@ -20,7 +20,7 @@
           <div class="modal-body">
             {% csrf_token %}
             Workout Name:
-            <input type="text" name="workout" value="{{ workout.name_of_workout }}" />
+            <input type="text" name="workout" value="{{ workout.name }}" />
             Reps:
             <input type="text" name="reps" value="{{ workout.reps }}" />
           </div>
@@ -49,7 +49,7 @@
         <div class="modal-body">
           {% csrf_token %}
           Workout Name:
-          <input type="text" name="workout" value="{{ workout.name_of_workout }}" />
+          <input type="text" name="workout" value="{{ workout.name }}" />
           Reps:
           <input type="text" name="reps" value="{{ workout.reps }}" />
         </div>

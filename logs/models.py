@@ -3,15 +3,15 @@ from django.contrib.auth.models import User
 
 
 class Workout(models.Model):
-    name_of_workout = models.CharField(max_length=30)
+    name = models.CharField(max_length=30)
     reps = models.PositiveIntegerField()
 
     def __unicode__(self):
-        return self.name_of_workout
+        return self.name
 
     @classmethod
-    def create(cls, name_of_workout, reps):
-        workout = cls(name_of_workout=name_of_workout, reps=reps)
+    def create(cls, name, reps):
+        workout = cls(name=name, reps=reps)
         return workout
 
 
