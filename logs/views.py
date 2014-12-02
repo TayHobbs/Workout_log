@@ -3,11 +3,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from logs.forms import UserForm
 from logs.models import Workout, Log
+from logs.logging.current_logs import CurrentLogs
 
 
 def index(request):
@@ -16,7 +16,7 @@ def index(request):
 
 def logs(request):
     if request.user.is_authenticated():
-        logs = Log.objects.all()
+        logs = Log.objects.filter(user=request.user)
         return render(request, 'logs/logs.html', {'logs': logs})
     else:
         return HttpResponse("You are not signed in")
@@ -32,8 +32,6 @@ def signup(request):
             user.set_password(user.password)
             user.save()
             registered = True
-        else:
-            print user_form.errors
     else:
         user_form = UserForm()
     return render_to_response(
@@ -50,7 +48,6 @@ def user_login(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
-
         if user:
             if user.is_active:
                 login(request, user)
@@ -58,7 +55,6 @@ def user_login(request):
             else:
                 return HttpResponse("Your account is disabled")
         else:
-            print "Invalid login details: {}, {}".format(username, password)
             return HttpResponse("Invalid login details")
     else:
         return render(request, 'logs/login.html')
@@ -72,11 +68,18 @@ def detail(request, log_id):
         return HttpResponseRedirect('/')
 
 
-def create(request):
-    user = request.user
+def add_to_log(request):
+    log = CurrentLogs().add_to_existing_log(request.POST)
+    if log:
+        return HttpResponseRedirect(reverse('detail', args=(log.id,)))
+    else:
+        return HttpResponseRedirect('/logs')
+
+
+def create_new_log(request):
     workout = Workout.create(request.POST['workout'], request.POST['reps'])
     workout.save()
-    log = Log.objects.create(user=user, name=request.POST['log'])
+    log = Log.objects.create(user=request.user, name=request.POST['log'])
     log.workouts.add(workout)
     return HttpResponseRedirect(reverse('logs'))
 
