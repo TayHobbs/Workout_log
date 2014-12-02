@@ -1,8 +1,25 @@
 from django.test import TestCase
-from django.utils import unittest
 from django.contrib.auth.models import User
 
 from logs.models import Log, Workout
+from logs.logging.current_logs import CurrentLogs
+
+
+class AddToExistingLogTests(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create(username="test.user")
+        self.log = Log.objects.create(user=self.user)
+
+    def test_log_has_a_user(self):
+        log = Log.objects.create(user=self.user)
+        self.assertEqual(log.user, self.user)
+
+    def test_log_created_is_different_based_on_context(self):
+        request = {"workout": "bench", "reps": 2, "log": 1}
+        CurrentLogs().add_to_existing_log(request)
+        created_log = Workout.objects.get(name_of_workout=request["workout"])
+        self.assertEqual(created_log.name_of_workout, "bench")
 
 
 class CreateLogsTests(TestCase):
