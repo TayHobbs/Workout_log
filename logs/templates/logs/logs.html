@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <body>
+{% extends 'logs/base.html' %}
+{% block body_block %}
     <h1>Workout Log</h1>
     Logs:
     <ul>
@@ -9,17 +8,58 @@
       {% endfor %}
     </ul>
 
-    <h3>Record a new Log:</h3>
-      <form action="/create/" method="post">
-      {% csrf_token %}
-      <input type="text" name="log" value="{{ log.name }}" />
-      <input type="text" name="workout" value="{{ workout.name_of_workout }}" />
-      <input type="text" name="reps" value="{{ workout.reps }}" />
-      <input type="submit" name="submit" value="Create" />
-    </form>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#create-new-log">Create New Log</button>
 
+<div class="modal fade" id="create-new-log" tabindex="-1" role="dialog" aria-labelledby="create-new-log-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form action="/create_new_log/" method="POST">
+          <div class="modal-header">
+            <h4 class="modal-title"><input placeholder="Log Name" type="text" name="log" value="{{ log.name }}" /></h4>
+          </div>
+          <div class="modal-body">
+            {% csrf_token %}
+            Workout Name:
+            <input type="text" name="workout" value="{{ workout.name_of_workout }}" />
+            Reps:
+            <input type="text" name="reps" value="{{ workout.reps }}" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input class="btn btn-primary" type="submit" name="submit" value="Create New Log" />
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add-to-log">Add to Existing Log</button>
+
+<div class="modal fade" id="add-to-log" tabindex="-1" role="dialog" aria-labelledby="add-to-log-label" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form action="/add_to_log/" method="POST">
+        <div class="modal-header">
+            <select name="log_dropdown">
+              {% for log in logs %}
+              <option value="{{ log.name }}">{{ log.name }} - {{ log.date }}</option>
+              {% endfor %}
+            </select>
+        </div>
+        <div class="modal-body">
+          {% csrf_token %}
+          Workout Name:
+          <input type="text" name="workout" value="{{ workout.name_of_workout }}" />
+          Reps:
+          <input type="text" name="reps" value="{{ workout.reps }}" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <input class="btn btn-primary" type="submit" name="submit" value="Add To Log" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
     <a href="{% url 'logout' %}">Logout</a>
-
-  </body>
-</html>
-
+    {% endblock %}

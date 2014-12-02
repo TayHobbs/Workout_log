@@ -1,0 +1,61 @@
+div.parallax {
+    height: 900px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.opacity {
+    background-color:rgba(0,0,0,0.5);
+    height: 900px;
+}
+
+.info {
+    height: 900px;
+}
+
+.login {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.login:hover {
+    color: grey;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+}
+
+.nav-bar {
+    position: relative;
+    top: 20px;
+    width:100%;
+    margin: 0 0 0 -10%;
+    left:100%;
+    color: white;
+}
+
+.btn-register {
+    position: relative;
+    bottom: 250px;
+    width:30%;
+    margin: 0 0 0 -40%;
+    left:40%;
+}
+
+div.parallax h1 {
+    color: white;
+    font-size: 5vw;
+    line-height: 700px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+div.parallax-1 {
+    background-image: url("../img/gym_stock.JPG");
+}
+
+
