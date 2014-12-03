@@ -70,10 +70,7 @@ def detail(request, log_id):
 
 def add_to_log(request):
     log = CurrentLogs().add_to_existing_log(request.POST)
-    if log:
-        return HttpResponseRedirect(reverse('detail', args=(log.id,)))
-    else:
-        return HttpResponseRedirect('/logs')
+    return HttpResponseRedirect(reverse('detail', args=(log.id,)))
 
 
 def create_new_log(request):

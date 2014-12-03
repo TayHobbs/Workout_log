@@ -1,6 +1,3 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-
 from logs.models import Log, Workout
 
 
