@@ -1,17 +1,19 @@
 {% extends 'logs/base.html' %}
+{% block nav_bar %}
+  <div class="top-nav">
+    <div class="pull-left logo"><a href="{% url "index" %}">Workout Logger</a></div>
+    <!-- <div class="nav-logout"><a href="{% url "logout" %}">Logout</a></div> -->
+    <!-- <div class="nav-logs active"><a href="{% url "logs" %}">Logs</a></div> -->
+  </div>
+{% endblock %}
 {% block body_block %}
-        <h1>Register</h1>
-
-        {% if registered %}
-        Rango says: <strong>thank you for registering!</strong>
-        <a href="/">Return to the homepage.</a><br />
-        {% else %}
-        Rango says: <strong>register here!</strong><br />
-
-        <form id="user_form" method="post" action="/signup/" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ user_form.as_p }}
-            <input type="submit" name="submit" value="Signup" />
-        </form>
-        {% endif %}
-    {% endblock %}
+  <div id="container">
+    <h1>Register</h1>
+      <form id="user_form" method="post" action="/signup/" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ user_form.as_p }}
+          <input type="submit" name="submit" value="Signup" />
+      </form>
+    {% endif %}
+  </div>
+{% endblock %}

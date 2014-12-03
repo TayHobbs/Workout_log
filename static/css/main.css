@@ -58,4 +58,79 @@ div.parallax-1 {
     background-image: url("../img/gym_stock.JPG");
 }
 
+.top-nav {
+    position: fixed;
+    height: 45px;
+    width: 100%;
+    background-color: hsla(360,0%,100%,1);
+    top: 0;
+    -webkit-box-shadow: 0px 0px 2px 1px hsla(360,0%,0%,0.4);
+       -moz-box-shadow: 0px 0px 2px 1px hsla(360,0%,0%,0.4);
+            box-shadow: 0px 0px 2px 1px hsla(360,0%,0%,0.4);
+}
 
+#container {
+    padding-top: 70px;
+}
+
+.logo {
+    margin: 5px;
+}
+
+.logo a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    color: hsla(280,96%,28%,1);
+}
+
+.logo a:hover {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    color: hsla(280,96%,28%,0.3);
+    text-decoration: none;
+}
+
+.nav-logout {
+    float: right;
+    margin: 0 20px;
+    padding: 10px;
+}
+
+
+.nav-logout:hover {
+    float: right;
+    margin: 0 20px;
+    padding: 10px;
+    border-bottom: 3px solid hsla(280,96%,28%,0.3);
+}
+
+.nav-logs {
+   float: right;
+   padding: 10px;
+}
+
+.nav-logs:hover {
+   float: right;
+   padding: 10px;
+   border-bottom: 3px solid hsla(280,96%,28%,0.3);
+}
+
+.nav-logs.active {
+   float: right;
+   padding: 10px;
+   border-bottom: 3px solid hsla(280,96%,28%,0.3);
+}
+
+.nav-logs a {
+   font-family: 'Montserrat', sans-serif;
+   font-size: 17px;
+   text-decoration: none;
+   color: hsla(280,96%,28%,1) 
+}
+
+.nav-logout a {
+   font-family: 'Montserrat', sans-serif;
+   font-size: 17px;
+   text-decoration: none;
+   color: hsla(280,96%,28%,1) 
+}
