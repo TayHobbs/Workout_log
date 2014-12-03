@@ -18,6 +18,28 @@ div.parallax {
     height: 900px;
 }
 
+@media (max-width:960px) {
+    .nav-bar {
+        position: relative;
+        top: 20px;
+        width: 180px;
+        margin: 0 0 0 -20%;
+        left: 80%;
+        color: white;
+    }
+}
+
+@media (min-width:960px) {
+    .nav-bar {
+        position: relative;
+        top: 20px;
+        width: 180px;
+        margin: 0 0 0 -20%;
+        left: 100%;
+        color: white;
+    }
+ }
+
 .login {
     color: white;
     font-family: 'Montserrat', sans-serif;
@@ -29,13 +51,16 @@ div.parallax {
     text-decoration: none;
 }
 
-.nav-bar {
-    position: relative;
-    top: 20px;
-    width:100%;
-    margin: 0 0 0 -10%;
-    left:100%;
+.create-log {
     color: white;
+    text-decoration: none;
+    margin: 25px;
+}
+
+.create-log:hover {
+    color: grey;
+    text-decoration: none;
+    margin: 25px;
 }
 
 .btn-register {
@@ -125,12 +150,12 @@ div.parallax-1 {
    font-family: 'Montserrat', sans-serif;
    font-size: 17px;
    text-decoration: none;
-   color: hsla(280,96%,28%,1) 
+   color: hsla(280,96%,28%,1)
 }
 
 .nav-logout a {
    font-family: 'Montserrat', sans-serif;
    font-size: 17px;
    text-decoration: none;
-   color: hsla(280,96%,28%,1) 
+   color: hsla(280,96%,28%,1)
 }
