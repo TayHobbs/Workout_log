@@ -1,0 +1,22 @@
+<div class="modal fade" id="create-new-log" tabindex="-1" role="dialog" aria-labelledby="create-new-log-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form action="/create_new_log/" method="POST">
+          <div class="modal-header">
+            <h4 class="modal-title"><input placeholder="Log Name" type="text" name="log" value="{{ log.name }}" /></h4>
+          </div>
+          <div class="modal-body">
+            {% csrf_token %}
+            Workout Name:
+            <input type="text" name="workout" value="{{ workout.name }}" />
+            Reps:
+            <input type="text" name="reps" value="{{ workout.reps }}" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input class="btn btn-primary" type="submit" name="submit" value="Create New Log" />
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
