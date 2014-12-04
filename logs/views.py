@@ -26,21 +26,22 @@ def signup(request):
     context = RequestContext(request)
     registered = False
     if request.method == 'POST':
-        user_form = UserForm(data=request.POST)
-        if user_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-            registered = True
+        form = UserForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            new_user.set_password(new_user.password)
+            new_user.save()
+            new_user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password'])
+            login(request, new_user)
+            return HttpResponseRedirect("/logs/")
     else:
-        user_form = UserForm()
+        form = UserForm()
     return render_to_response(
         'logs/signup.html',
-        {'user_form': user_form, 'registered': registered},
+        {'user_form': form, 'registered': registered},
         context
     )
-
-    return render(request, 'logs/signup.html')
 
 
 def user_login(request):
