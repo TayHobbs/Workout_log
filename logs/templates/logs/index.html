@@ -5,7 +5,9 @@
   <div class="module parallax parallax-1">
     <div class="opacity">
       <div class="nav-bar">
-        <a class="login" href="{% url 'login' %}">Log In</a>
+        {% if not user.is_authenticated %}
+          <a class="login" href="{% url 'login' %}">Log In</a>
+        {% endif %}
         <a class="create-log" href="{% url 'logs' %}">Create a Log</a>
       </div>
         <h1>Workout Logger</h1>

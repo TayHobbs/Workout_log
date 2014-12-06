@@ -70,14 +70,14 @@ div.parallax {
     margin: 0 0 0 -40%;
     left:38%;
     color: hsla(360,0%,100%,1);
-    background-color: hsla(280,96%,40%,1);
+    background-color: hsla(280,96%,60%,1);
     font-family: 'Montserrat', sans-serif;
     min-width: 100px;
 }
 
 .btn-register:hover {
-    color: hsla(66,3%,75%,0.75);
-    background-color: hsla(280,96%,28%,1);
+    color: hsla(360,0%,100%,1);
+    background-color: hsla(280,96%,48%,1);
     text-decoration: none;
 }
 
