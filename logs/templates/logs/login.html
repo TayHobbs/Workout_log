@@ -8,14 +8,31 @@
 {% endblock %}
 {% block body_block %}
   <div id="container">
-    <h1>Login to Logs</h1>
-    <form id="login_form" method="post" action="/login/">
-        {% csrf_token %}
-        Username: <input type="text" name="username" value="" size="50" />
-        <br />
-        Password: <input type="password" name="password" value="" size="50" />
-        <br />
-        <input type="submit" value="submit" />
-    </form>
+  </div>
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      {% if not user.is_authenticated %}
+        <div class="modal-header">
+          <h2 class="modal-title">Login</h2>
+        </div>
+      {% endif %}
+      <div class="modal-body">
+        {% if user.is_authenticated %}
+          <h3>You're already signed in!</h3>
+          <a href="{% url "logs" %}">Create a Log</a>
+        {% else %}
+          <form id="login_form" method="post" action="/login/">
+              {% csrf_token %}
+              <label for="username">Username:</label>
+              <input type="text" id="username" class="form-control" name="username" value="" size="50" />
+              <label for="password">Password:</label>
+              <input type="password" id="password" class="form-control" name="password" value="" size="50" />
+            <div class="modal-footer modal-footer-margin">
+              <input class="button modal-button" type="submit" name="submit" value="Login" />
+            </div>
+          </form>
+        {% endif %}
+    </div>
   </div>
 {% endblock %}
