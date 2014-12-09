@@ -179,7 +179,7 @@ div.parallax-1 {
 }
 
 #container {
-    padding-top: 70px;
+    padding-top: 15px;
 }
 
 .logo {
@@ -279,7 +279,44 @@ div.parallax-1 {
 }
 
 .your-logs {
-    font-size: 15px;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
+}
+
+/* Detail Template */
+
+.workouts {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.workout {
+    border-bottom: 1px solid hsla(66,3%,75%,0.75);
+    padding-bottom: 10px;
+}
+
+.workout-name {
+    color: hsla(0,100%,0%,1);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.workout-name-input {
+    margin: 0 5px 0 40px;
+}
+.workout-reps {
+    font-size: 15px;
+}
+
+.add-workout-btn {
+    margin: 0 0 3px 5px;
+    padding: 6px;
+}
+
+.workout-form {
+    margin-top: 20px;
+}
+
+.workout-form .form-control {
+    display: inline-block;
+    width: 150px;
 }

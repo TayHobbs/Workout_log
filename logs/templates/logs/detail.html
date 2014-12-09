@@ -8,20 +8,30 @@
 {% endblock %}
 {% block body_block %}
   <div id="container">
-    <h1>Workout:</h1>
-    {% for workout in log.workouts.all %}
-      Workout: {{ workout.name }}<br>
-      Reps: {{ workout.reps }}<br>
-    {% endfor %}
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h6 class="workouts">{{ log.name }} Workouts:</h6>
+        <div class="col-md-8 col-md-offset-2">
+            {% for workout in log.workouts.all %}
+              <div class="workout">
+                <h3 class="workout-name">{{ workout.name }}</h3>
+                <div class="workout-reps">{{ workout.reps}} Reps</div>
+              </div>
+            {% endfor %}
+        </div>
+      </div>
+    </div>
 
-    <form action="{% url 'add_to_log' %}" method="POST">
-      {% csrf_token %}
-      <input name='log' value="{{ log.id }}" class="hidden"/>
-      Workout Name:
-      <input type="text" name="workout" value="{{ workout.name }}" />
-      Reps:
-      <input type="text" name="reps" value="{{ workout.reps }}" />
-      <input class="btn btn-primary" type="submit" name="submit" value="Create New Log" />
-    </form>
+    <div class="row workout-form">
+      <div class="col-md-8 col-md-offset-3">
+        <form action="{% url 'add_to_log' %}" method="POST">
+          {% csrf_token %}
+          <input name='log' value="{{ log.id }}" class="hidden"/>
+          <input type="text" class="workout-name-input form-control" name="workout" value="{{ workout.name }}" placeholder="Name"/>
+          <input type="text" class="form-control" name="reps" value="{{ workout.reps }}" placeholder="Reps"/>
+          <input class="btn btn-primary add-workout-btn" type="submit" name="submit" value="Add Workout" />
+        </form>
+      </div>
+    </div>
   </div>
 {% endblock %}
