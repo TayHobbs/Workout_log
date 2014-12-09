@@ -1,10 +1,7 @@
-{% extends 'logs/base.html' %}
+{% extends 'logs/internal_base.html' %}
 {% block nav_bar %}
   <div class="top-nav">
     <div class="pull-left logo"><a href="{% url "index" %}">Workout Logger</a></div>
-    <!-- <div class="nav-logout"><a href="{% url "logout" %}">Logout</a></div> -->
-    <!-- <div class="nav-logs active"><a href="{% url "logs" %}">Logs</a></div> -->
-  </div>
 {% endblock %}
 {% block body_block %}
   <div id="container">

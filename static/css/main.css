@@ -18,7 +18,7 @@ div.parallax {
     height: 900px;
 }
 
-@media (max-width:960px) {
+@media (max-width:766px) {
     .nav-bar {
         position: relative;
         top: 20px;
@@ -27,9 +27,35 @@ div.parallax {
         left: 80%;
         color: white;
     }
+
+    .navbar-default .navbar-nav .open .dropdown-menu li a:hover {
+        color: hsla(280,96%,28%,1);
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu li a:active {
+        color: hsla(280,96%,28%,1);
+    }
+
+    .navbar-default .navbar-nav .open a, .navbar-default .navbar-nav .open a:hover, .navbar-default .navbar-nav .open a:focus {
+        color: hsla(280,96%,28%,1);
+    }
+
+    .navbar-default .navbar-nav li a {
+        margin-bottom: -3px;
+    }
+
+    .navbar-default .navbar-nav li a:hover {
+        color: hsla(280,96%,28%,1);
+        border-bottom: 0px solid white;
+    }
+
+    .navbar-default .navbar-nav li a.active {
+        color: hsla(280,96%,28%,1);
+        border-bottom: 0px solid white;
+    }
 }
 
-@media (min-width:960px) {
+@media (min-width:767px) {
     .nav-bar {
         position: relative;
         top: 20px;
@@ -37,6 +63,31 @@ div.parallax {
         margin: 0 0 0 -15%;
         left: 100%;
         color: white;
+    }
+
+    .navbar-default .navbar-nav li a {
+        margin-bottom: -4px;
+        color: hsla(280,96%,28%,1);
+    }
+
+    .navbar-default .navbar-nav li a:hover {
+       color: hsla(280,96%,28%,1);
+       border-bottom: 2px solid hsla(280,96%,28%,1);
+    }
+
+    .navbar-default .navbar-nav li a.active {
+       color: hsla(280,96%,28%,1);
+       border-bottom: 2px solid hsla(280,96%,28%,1);
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu li a:hover {
+        color: hsla(280,96%,28%,1);
+        border-bottom: 0;
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu li a:active {
+        color: hsla(280,96%,28%,1);
+        border-bottom: 0;
     }
  }
 
@@ -114,15 +165,17 @@ div.parallax-1 {
     background-image: url("../img/gym_stock.JPG");
 }
 
-.top-nav {
-    position: fixed;
-    height: 45px;
-    width: 100%;
+/* Navbar */
+@media (max-width:780px) {
+}
+
+.navbar-default {
     background-color: hsla(360,0%,100%,1);
     top: 0;
     -webkit-box-shadow: 0px 0px 2px 1px hsla(360,0%,0%,0.4);
        -moz-box-shadow: 0px 0px 2px 1px hsla(360,0%,0%,0.4);
             box-shadow: 0px 0px 2px 1px hsla(360,0%,0%,0.4);
+    border-radius: 0;
 }
 
 #container {
@@ -130,22 +183,19 @@ div.parallax-1 {
 }
 
 .logo {
-    margin: 5px;
-}
-
-.logo a {
     font-family: 'Montserrat', sans-serif;
     font-size: 25px;
     color: hsla(280,96%,28%,1);
+    display: block;
+    margin: 5px;
 }
 
-.logo a:hover {
+.logo:hover {
     color: hsla(280,96%,28%,0.7);
     text-decoration: none;
 }
 
-.nav-logout {
-    float: right;
+.nav-item {
     margin: 0 20px;
     padding: 10px;
 }
@@ -180,12 +230,12 @@ div.parallax-1 {
    color: hsla(280,96%,28%,1)
 }
 
-.nav-logout a {
+.links {
    font-family: 'Montserrat', sans-serif;
    font-size: 17px;
    text-decoration: none;
-   color: hsla(280,96%,28%,1)
 }
+
 
 .modal-footer-margin {
     margin-top: 15px;
@@ -205,4 +255,31 @@ div.parallax-1 {
 
 .modal-button:hover {
     background: rgba(175,12,230,1);
+}
+
+.log {
+    border-bottom: 1px solid hsla(66,3%,75%,0.75);
+    padding-bottom: 10px;
+}
+
+.log-name a {
+    color: hsla(0,100%,0%,1);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.log-name a:hover {
+    color: hsla(66,3%,35%,1);
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.log-date {
+    font-size: 12px;
+    color: hsla(66,3%,25%,0.75);
+}
+
+.your-logs {
+    font-size: 15px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
 }

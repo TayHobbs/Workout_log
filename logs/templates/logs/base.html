@@ -8,13 +8,11 @@
       <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
       <title>Workout Logger</title>
     </head>
-    
-    <nav>
-      {% block nav_bar %}{% endblock %}
-    </nav>
 
     <body>
       {% block body_block %}{% endblock %}
+      {% include "modals/create_new_log.html" %}
+      {% include "modals/add_to_existing_log.html" %}
     </body>
     <script src="{% static 'js/jquery-2.1.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
