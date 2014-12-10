@@ -16,7 +16,7 @@ def index(request):
 
 def logs(request):
     if request.user.is_authenticated():
-        logs = Log.objects.filter(user=request.user)
+        logs = Log.objects.filter(user=request.user).order_by('-date')
         return render(request, 'logs/logs.html', {'logs': logs})
     else:
         return HttpResponse("You are not signed in")
