@@ -120,16 +120,21 @@ div.parallax {
     width:30%;
     margin: 0 0 0 -40%;
     left:38%;
+    background: rgba(285,90%,48%,1);
+    background: -moz-linear-gradient(top, rgba(175,12,230,1) 0%, rgba(149,18,179,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(175,12,230,1)), color-stop(100%, rgba(149,18,179,1)));
+    background: -webkit-linear-gradient(top, rgba(175,12,230,1) 0%, rgba(149,18,179,1) 100%);
+    background: -o-linear-gradient(top, rgba(175,12,230,1) 0%, rgba(149,18,179,1) 100%);
+    background: -ms-linear-gradient(top, rgba(175,12,230,1) 0%, rgba(149,18,179,1) 100%);
+    background: linear-gradient(to bottom, rgba(175,12,230,1) 0%, rgba(149,18,179,1) 100%);
     color: hsla(360,0%,100%,1);
-    background-color: hsla(280,96%,60%,1);
     font-family: 'Montserrat', sans-serif;
     min-width: 100px;
 }
 
 .btn-register:hover {
-    color: hsla(360,0%,100%,1);
-    background-color: hsla(280,96%,48%,1);
-    text-decoration: none;
+    background: rgba(175,12,230,1);
+    border: 1.5px solid rgba(149,18,179,1);
 }
 
 .button {
@@ -149,7 +154,6 @@ div.parallax {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    background-image: none;
     border: 1px solid transparent;
 }
 
@@ -255,6 +259,7 @@ div.parallax-1 {
 
 .modal-button:hover {
     background: rgba(175,12,230,1);
+    border: 1.5px solid rgba(149,18,179,1);
 }
 
 .log {

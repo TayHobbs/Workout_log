@@ -12,7 +12,9 @@
       </div>
         <h1>Workout Logger</h1>
         <div class="col-xs-offset-5">
-          <a class="button btn-register" href="{% url "signup" %}">Register</a>
+          <form method="GET" action="{% url "signup" %}">
+            <button class="button btn-register" type="submit">Register</button>
+        </form>
         </div>
     </div>
   </div>
