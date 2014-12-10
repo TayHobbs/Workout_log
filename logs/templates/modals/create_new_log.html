@@ -7,10 +7,10 @@
           </div>
           <div class="modal-body">
             {% csrf_token %}
-            Workout Name:
-            <input type="text" name="workout" value="{{ workout.name }}" />
-            Reps:
-            <input type="text" name="reps" value="{{ workout.reps }}" />
+            <label for="workout">Workout Name:</label>
+            <input type="text" name="workout" id="workout" value="{{ workout.name }}" />
+            <label for="reps">Reps:</label>
+            <input type="text" name="reps" id="reps" value="{{ workout.reps }}" />
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

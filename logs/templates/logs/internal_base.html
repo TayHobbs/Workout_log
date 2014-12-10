@@ -3,16 +3,15 @@
 
 <html>
     <head>
-      <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
-      <link href="{% static 'css/main.css' %}" rel="stylesheet" media="screen">
-      <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+      <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" media="screen">
+      <link href="{% static "css/main.css" %}" rel="stylesheet" media="screen">
+      <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
       <title>Workout Logger</title>
     </head>
     
     {% block nav %}
       <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
-          <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
               <span class="sr-only">Toggle navigation</span>
@@ -22,8 +21,6 @@
             </button>
             <a class="logo" href="{% url "index" %}">Workout Logger</a>
           </div>
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right links">
               <li>{% block nav_logs %}<a href="{% url "logs" %}">Logs</a>{% endblock %}</li>
@@ -37,7 +34,7 @@
               </li>
             </ul>
           </div>
-          </div>
+        </div>
       </nav>
     {% endblock %}
 
@@ -46,6 +43,6 @@
       {% include "modals/create_new_log.html" %}
       {% include "modals/add_to_existing_log.html" %}
     </body>
-    <script src="{% static 'js/jquery-2.1.1.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static "js/jquery-2.1.1.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
 </html>

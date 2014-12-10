@@ -28,8 +28,8 @@ class CreateLogsTests(TestCase):
         self.user = User.objects.create(username="test.user")
 
     def test_log_can_have_multiple_workouts(self):
-        workout_one = Workout.create('Bench', 5)
-        workout_two = Workout.create('Squat', 5)
+        workout_one = Workout.create("Bench", 5)
+        workout_two = Workout.create("Squat", 5)
         workout_one.save()
         workout_two.save()
         log = Log.objects.create(user=self.user)

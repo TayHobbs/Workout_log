@@ -1,44 +1,49 @@
-{% extends 'logs/internal_base.html' %}
+{% extends "logs/internal_base.html" %}
+
 {% block nav_bar %}
   <div class="top-nav">
-    <div class="pull-left logo"><a href="{% url "index" %}">Workout Logger</a></div>
+    <div class="pull-left logo">
+      <a href="{% url "index" %}">Workout Logger</a>
+    </div>
+  </div>
 {% endblock %}
+
 {% block body_block %}
   <div id="container">
-  </div>
-
-  <div class="modal-dialog">
-    <div class="modal-content">
-      {% if not user.is_authenticated %}
-        <div class="modal-header">
-          <h2 class="modal-title">Register</h2>
-        </div>
-      {% endif %}
-      <div class="modal-body">
-        {% if user.is_authenticated %}
-          <h3>You're already signed in!</h3>
-          <a href="{% url "logs" %}">Create a Log</a>
-        {% else %}
-          <form id="user_form" method="post" action="/signup/" enctype="multipart/form-data">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        {% if not user.is_authenticated %}
+          <div class="modal-header">
+            <h2 class="modal-title">Register</h2>
+          </div>
+        {% endif %}
+        <div class="modal-body">
+          {% if user.is_authenticated %}
+            <h3>You're already signed in!</h3>
+            <a href="{% url "logs" %}">Create a Log</a>
+          {% else %}
+            <form id="user_form" method="post" action="/signup/" enctype="multipart/form-data">
               {% csrf_token %}
               {{ user_form.non_field_errors }}
               <div class="fieldWrapper">
-                  {{ user_form.subject.errors }}
-                  <label for="id_username">Username:</label>
-                  {{ user_form.username }}
+                {{ user_form.subject.errors }}
+                <label for="id_username">Username:</label>
+                {{ user_form.username }}
               </div>
               <div class="fieldWrapper">
-                  {{ user_form.message.errors }}
-                  <label for="id_password">Password:</label>
-                  {{ user_form.password }}
+                {{ user_form.message.errors }}
+                <label for="id_password">Password:</label>
+                {{ user_form.password }}
               </div>
-          </form>
-        {% endif %}
-        {% if not user.is_authenticated %}
-          <div class="modal-footer modal-footer-margin">
-            <input class="button modal-button" type="submit" name="submit" value="Signup" />
-          </div>
-        {% endif %}
+            </form>
+          {% endif %}
+          {% if not user.is_authenticated %}
+            <div class="modal-footer modal-footer-margin">
+              <input class="button modal-button" type="submit" name="submit" value="Signup" />
+            </div>
+          {% endif %}
+        </div>
       </div>
+    </div>
   </div>
 {% endblock %}

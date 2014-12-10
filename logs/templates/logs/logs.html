@@ -1,4 +1,4 @@
-{% extends 'logs/internal_base.html' %}
+{% extends "logs/internal_base.html" %}
 
 
 {% block nav_logs %}
@@ -11,7 +11,7 @@
     <div class="col-md-8 col-md-offset-2">
         {% for log in logs %}
           <div class="log">
-            <h3 class="log-name"><a href="{% url 'detail' log.id %}">{{ log.name }}</a></h3>
+            <h3 class="log-name"><a href="{% url "detail" log.id %}">{{ log.name }}</a></h3>
             <div class="log-date">{{ log.date }}</div>
           </div>
         {% endfor %}
