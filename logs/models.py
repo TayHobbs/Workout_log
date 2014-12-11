@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -16,7 +18,7 @@ class Workout(models.Model):
 
 
 class Log(models.Model):
-    date = models.DateField(auto_now=True)
+    date = models.DateField(default=datetime.now, blank=True)
     name = models.CharField(max_length=30)
     workouts = models.ManyToManyField(Workout)
     user = models.ForeignKey(User)

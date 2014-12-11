@@ -42,3 +42,11 @@ class LogsViewTests(TestCase):
         response = self.client.get(reverse("logs"))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["logs"]), 1)
+
+    def test_logs_are_ordered_by_date(self):
+        self.client.login(username="test.user", password="asdf")
+        Log.objects.create(user=self.user, name="Second Log", date=datetime.date(2013, 12, 02))
+        Log.objects.create(user=self.user, name="First Log")
+        response = self.client.get(reverse("logs"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["logs"][0].name, 'First Log')
