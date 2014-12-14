@@ -1,5 +1,3 @@
-import datetime
-
 from django.test.client import RequestFactory
 from django.test import TestCase
 from django.test.client import Client
@@ -8,14 +6,6 @@ from django.contrib.auth.models import User
 
 from logs.models import Log, Workout
 from logs.logging.current_logs import CurrentLogs
-from logs.views import *
-
-
-class IndexViewTests(TestCase):
-
-    def test_index_view(self):
-        response = self.client.get(reverse("index"))
-        self.assertEqual(response.status_code, 200)
 
 
 class LogsViewTests(TestCase):
@@ -25,28 +15,31 @@ class LogsViewTests(TestCase):
         self.client = Client()
         self.user = User.objects.create_user(username="test.user", password="asdf")
 
-    def test_logs_view_when_user_is_not_logged_in(self):
+    def test_user_must_be_logged_in_to_see_detail(self):
         response = self.client.get(reverse("logs"))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, "You are not signed in")
+        self.assertTemplateUsed("logs/index.html")
 
-    def test_logs_view_when_user_is_logged_in(self):
+    def test_404_when_user_logged_in_and_log_does_not_exist(self):
         self.client.login(username="test.user", password="asdf")
-        response = self.client.get(reverse("logs"))
+        response = self.client.get(reverse("detail", args=[1]))
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Logout", response.content)
+        self.assertTemplateUsed("errors/404.html")
 
-    def test_logs_view_shows_logs_when_logs_are_created(self):
+    def test_shows_log_when_user_logged_in_and_log_exists(self):
         self.client.login(username="test.user", password="asdf")
         Log.objects.create(user=self.user, name="New Log")
-        response = self.client.get(reverse("logs"))
+        response = self.client.get(reverse("detail", args=[1]))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context["logs"]), 1)
+        self.assertEqual(response.context["log"].name, "New Log")
 
-    def test_logs_are_ordered_by_date(self):
+    def test_workouts_show_on_log_detail_page(self):
         self.client.login(username="test.user", password="asdf")
-        Log.objects.create(user=self.user, name="Second Log", date=datetime.date(2013, 12, 02))
-        Log.objects.create(user=self.user, name="First Log")
-        response = self.client.get(reverse("logs"))
+        workout = Workout.create("New Workout", 5)
+        workout.save()
+        log = Log.objects.create(user=self.user, name="New Log")
+        log.workouts.add(workout)
+        log.save()
+        response = self.client.get(reverse("detail", args=[1]))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context["logs"][0].name, 'First Log')
+        self.assertEqual(len(response.context["log"].workouts.all()), 1)
