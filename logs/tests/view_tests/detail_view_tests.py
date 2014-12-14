@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from logs.models import Log, Workout
 
 
-class LogsViewTests(TestCase):
+class DetailViewTests(TestCase):
 
     def setUp(self):
         self.factory = RequestFactory()

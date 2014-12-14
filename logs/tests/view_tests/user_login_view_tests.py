@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 
-class LogsViewTests(TestCase):
+class LoginViewTests(TestCase):
 
     def setUp(self):
         self.factory = RequestFactory()
