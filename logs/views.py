@@ -56,15 +56,18 @@ def user_login(request):
             else:
                 return HttpResponse("Your account is disabled")
         else:
-            return HttpResponse("Invalid login details")
+            return render(request, "logs/login.html")
     else:
         return render(request, "logs/login.html")
 
 
 def detail(request, log_id):
     if request.user.is_authenticated():
-        log = Log.objects.get(pk=log_id)
-        return render(request, "logs/detail.html", {"log": log})
+        try:
+            log = Log.objects.get(pk=log_id)
+            return render(request, "logs/detail.html", {"log": log})
+        except:
+            return render(request, "errors/404.html")
     else:
         return HttpResponseRedirect("/")
 
