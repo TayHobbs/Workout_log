@@ -11,11 +11,7 @@ class AddToExistingLogTests(TestCase):
         self.user = User.objects.create(username="test.user")
         self.log = Log.objects.create(user=self.user)
 
-    def test_log_has_a_user(self):
-        log = Log.objects.create(user=self.user)
-        self.assertEqual(log.user, self.user)
-
-    def test_log_created_is_different_based_on_context(self):
+    def test_current_logs_class_creates_workout(self):
         request = {"workout": "bench", "reps": 2, "log": 1}
         CurrentLogs().add_to_existing_log(request)
         created_log = Workout.objects.get(name=request["workout"])
