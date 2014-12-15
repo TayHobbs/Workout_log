@@ -15,15 +15,16 @@ class DetailViewTests(TestCase):
         self.user = User.objects.create_user(username="test.user", password="asdf")
 
     def test_user_must_be_logged_in_to_see_detail(self):
-        response = self.client.get(reverse("logs"))
+        Log.objects.create(user=self.user, name="New Log")
+        response = self.client.get(reverse("detail", args=[1]), follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed("logs/index.html")
+        self.assertTemplateUsed(response, "logs/index.html")
 
     def test_404_when_user_logged_in_and_log_does_not_exist(self):
         self.client.login(username="test.user", password="asdf")
         response = self.client.get(reverse("detail", args=[1]))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed("errors/404.html")
+        self.assertTemplateUsed(response, "errors/404.html")
 
     def test_shows_log_when_user_logged_in_and_log_exists(self):
         self.client.login(username="test.user", password="asdf")

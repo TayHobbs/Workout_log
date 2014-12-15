@@ -17,9 +17,3 @@ class LoginViewTests(TestCase):
         response = self.client.get(reverse("login"))
         self.assertEqual(response.status_code, 200)
         self.assertIn("You\'re already signed in!", response.content)
-
-    def test_user_can_log_in(self):
-        request = {"username": self.user.username, "password": self.user.password}
-        response = self.client.post(reverse("login"), request)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed("logs/logs.html")
