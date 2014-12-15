@@ -4,8 +4,7 @@ from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
-from logs.models import Log, Workout
-from logs.logging.current_logs import CurrentLogs
+from logs.models import Log
 
 
 class AddToLogViewTests(TestCase):
