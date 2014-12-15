@@ -78,7 +78,7 @@ def add_to_log(request):
 
 
 def create_new_log(request):
-    workout = Workout.create(request.POST["workout"], request.POST["reps"])
+    workout = Workout.create(request.POST["workout"], request.POST["sets"], request.POST["reps"])
     workout.save()
     log = Log.objects.create(user=request.user, name=request.POST["log"])
     log.workouts.add(workout)

@@ -35,7 +35,7 @@ class DetailViewTests(TestCase):
 
     def test_workouts_show_on_log_detail_page(self):
         self.client.login(username="test.user", password="asdf")
-        workout = Workout.create("New Workout", 5)
+        workout = Workout.create("New Workout", 3, 5)
         workout.save()
         log = Log.objects.create(user=self.user, name="New Log")
         log.workouts.add(workout)

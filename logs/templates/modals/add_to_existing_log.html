@@ -13,7 +13,9 @@
           {% csrf_token %}
           <label for="workout">Workout Name:</label>
           <input type="text" name="workout" id="workout" value="{{ workout.name }}" />
-          <label for="reps">Reps:</label>
+          <label for="sets">Sets:</label>
+          <input type="text" name="set" id="sets" value="{{ workout.sets }}" />
+          <label for="reps">Reps Per Set:</label>
           <input type="text" name="reps" id="reps" value="{{ workout.reps }}" />
         </div>
         <div class="modal-footer">

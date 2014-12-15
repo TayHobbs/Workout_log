@@ -16,7 +16,7 @@
           <div class="workout">
             <h3 class="workout-name">{{ workout.name }}</h3>
             <div class="workout-reps">
-              {{ workout.reps}} Reps
+              {{ workout.reps}} Sets of {{ workout.reps}} Reps
             </div>
           </div>
         {% endfor %}
@@ -27,7 +27,8 @@
         {% csrf_token %}
         <input name="log" value="{{ log.id }}" class="hidden"/>
         <input type="text" class="workout-name-input form-control" name="workout" value="{{ workout.name }}" placeholder="Name"/>
-        <input type="text" class="form-control" name="reps" value="{{ workout.reps }}" placeholder="Reps"/>
+        <input type="text" name="set" id="sets" value="{{ workout.sets }}" placeholder="Sets"/>
+        <input type="text" name="reps" id="reps" value="{{ workout.reps }}" placeholder="Reps Per Set"/>
         <input class="btn btn-primary add-workout-btn" type="submit" name="submit" value="Add Workout" />
       </form>
     </div>

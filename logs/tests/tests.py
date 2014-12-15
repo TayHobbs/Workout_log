@@ -12,7 +12,7 @@ class AddToExistingLogTests(TestCase):
         self.log = Log.objects.create(user=self.user)
 
     def test_current_logs_class_creates_workout(self):
-        request = {"workout": "bench", "reps": 2, "log": 1}
+        request = {"workout": "bench", "sets": 3, "reps": 2, "log": 1}
         CurrentLogs().add_to_existing_log(request)
         created_log = Workout.objects.get(name=request["workout"])
         self.assertEqual(created_log.name, "bench")
@@ -24,8 +24,8 @@ class CreateLogsTests(TestCase):
         self.user = User.objects.create(username="test.user")
 
     def test_log_can_have_multiple_workouts(self):
-        workout_one = Workout.create("Bench", 5)
-        workout_two = Workout.create("Squat", 5)
+        workout_one = Workout.create("Bench", 3, 5)
+        workout_two = Workout.create("Squat", 3, 5)
         workout_one.save()
         workout_two.save()
         log = Log.objects.create(user=self.user)

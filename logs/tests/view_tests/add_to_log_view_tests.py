@@ -16,7 +16,7 @@ class AddToLogViewTests(TestCase):
 
     def test_workout_is_added_to_log(self):
         log = Log.objects.create(user=self.user, name="New Log")
-        data = {"workout": "New Workout", "reps": 5, "log": log.pk}
+        data = {"workout": "New Workout", "sets": 3, "reps": 5, "log": log.pk}
         self.client.login(username="test.user", password="asdf")
         response = self.client.post(reverse("add_to_log"), data, follow=True)
         self.assertEqual(response.status_code, 200)
