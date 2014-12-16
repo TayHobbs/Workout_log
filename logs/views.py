@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from logs.forms import UserForm
-from logs.models import Workout, Log
+from logs.models import Workout, Log, UserProfile
 from logs.logging.current_logs import CurrentLogs
 
 
@@ -31,6 +31,7 @@ def signup(request):
             new_user = form.save()
             new_user.set_password(new_user.password)
             new_user.save()
+            UserProfile.objects.create(user=new_user)
             new_user = authenticate(username=form.cleaned_data["username"],
                                     password=form.cleaned_data["password"])
             login(request, new_user)
@@ -89,3 +90,12 @@ def create_new_log(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect("/")
+
+
+@login_required
+def user_profile(request):
+    try:
+        profile = UserProfile.objects.get(user=request.user)
+        return render(request, "logs/profile.html", {"profile": profile})
+    except:
+        return render("errors/404.html")

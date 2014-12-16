@@ -1,0 +1,8 @@
+{% for log in profile.logs.all %}
+  {{ log.name }}
+{% endfor %}
+Info:
+{{ profile.user.username }}
+{{ profile.user.first_name }}
+{{ profile.user.last_name }}
+{{ profile.user.email }}

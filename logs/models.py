@@ -26,3 +26,15 @@ class Log(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    logs = models.ManyToManyField(Log, blank=True)
+    profile_picture = models.ImageField(upload_to='profile_images', blank=True)
+    twitter = models.URLField(blank=True)
+    facebook = models.URLField(blank=True)
+    website = models.URLField(blank=True)
+
+    def __unicode__(self):
+        return self.user.username
