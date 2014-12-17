@@ -4,9 +4,13 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
+from rest_framework import generics
 
 from logs.forms import UserForm
 from logs.models import Workout, Log, UserProfile
+from logs.serializers import LogSerializer, UserSerializer, UserProfileSerializer, WorkoutSerializer
 from logs.logging.current_logs import CurrentLogs
 
 
@@ -99,3 +103,40 @@ def user_profile(request):
         return render(request, "logs/profile.html", {"profile": profile})
     except:
         return render("errors/404.html")
+
+
+class LogList(generics.ListCreateAPIView):
+    queryset = Log.objects.all()
+    serializer_class = LogSerializer
+
+
+class LogDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Log.objects.all()
+    serializer_class = LogSerializer
+
+class UserProfileList(generics.ListCreateAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+
+class UserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+class WorkoutList(generics.ListCreateAPIView):
+    queryset = Workout.objects.all()
+    serializer_class = WorkoutSerializer
+
+
+class WorkoutDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Workout.objects.all()
+    serializer_class = WorkoutSerializer
+
+class UserList(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

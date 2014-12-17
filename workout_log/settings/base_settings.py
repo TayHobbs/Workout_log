@@ -43,6 +43,7 @@ PROJECT_APPS = (
 )
 
 INSTALLED_APPS = (
+    'rest_framework',
     'south',
     'django.contrib.admin',
     'django.contrib.admindocs',
@@ -52,3 +53,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ) + PROJECT_APPS
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
