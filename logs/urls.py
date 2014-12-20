@@ -2,7 +2,8 @@ from django.conf.urls import patterns, url
 
 from logs import views
 
-urlpatterns = patterns("",
+urlpatterns = patterns(
+    "",
     url(r"^$", views.index, name="index"),
     url(r"^logs/$", views.logs, name="logs"),
     url(r"^signup/$", views.signup, name="signup"),
