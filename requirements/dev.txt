@@ -1,5 +1,6 @@
+django<1.7
 flake8
 bpython
-djangorestframework
+djangorestframework<3.0
 markdown
 django-filter
