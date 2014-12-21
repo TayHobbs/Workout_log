@@ -1,10 +1,9 @@
 from django.test import TestCase
-from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from rest_framework.test import APIRequestFactory
 
-from logs.views import WorkoutDetail
+from logs.views import WorkoutViewSet
 from logs.models import Log, Workout, UserProfile
 from logs.serializers import WorkoutSerializer
 
@@ -27,8 +26,8 @@ class WorkoutAPITests(TestCase):
         self.assertEqual(serialized_dict.data, expected_dict)
 
     def test_workout_list_view_returns_all_workouts(self):
-        view = WorkoutDetail.as_view()
-        request = self.factory.get(reverse("workout_detail", args=[1]))
+        view = WorkoutViewSet.as_view({'get': 'retrieve'})
+        request = self.factory.get("/api/workout_api/1")
         response = view(request, pk='1')
         response.render()
         expected = '{"id": 1, "name": "New Workout", "sets": 3, "reps": 5}'

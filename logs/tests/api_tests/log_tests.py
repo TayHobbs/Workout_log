@@ -1,12 +1,11 @@
 import datetime
 
 from django.test import TestCase
-from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from rest_framework.test import APIRequestFactory
 
-from logs.views import LogDetail
+from logs.views import LogViewSet
 from logs.models import Log, Workout, UserProfile
 from logs.serializers import LogSerializer
 
@@ -29,8 +28,8 @@ class LogAPITests(TestCase):
         self.assertEqual(serialized_dict.data, expected_dict)
 
     def test_workout_list_view_returns_all_workouts(self):
-        view = LogDetail.as_view()
-        request = self.factory.get(reverse("log_detail", args=[1]))
+        view = LogViewSet.as_view({'get': 'retrieve'})
+        request = self.factory.get("/api/log_api/1")
         response = view(request, pk='1')
         response.render()
         expected = '{"id": 1, "name": "New Log", "date": "2013-12-02", "workouts": [1]}'

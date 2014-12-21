@@ -1,12 +1,11 @@
 import datetime
 
 from django.test import TestCase
-from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from rest_framework.test import APIRequestFactory
 
-from logs.views import UserProfileDetail
+from logs.views import UserProfileViewSet
 from logs.models import Log, UserProfile
 from logs.serializers import UserProfileSerializer
 
@@ -26,8 +25,8 @@ class UserProfileAPITests(TestCase):
         self.assertEqual(serialized_dict.data, expected_dict)
 
     def test_workout_list_view_returns_all_workouts(self):
-        view = UserProfileDetail.as_view()
-        request = self.factory.get(reverse("user_profile_detail", args=[1]))
+        view = UserProfileViewSet.as_view({'get': 'retrieve'})
+        request = self.factory.get("/api/profile_api/")
         response = view(request, pk='1')
         response.render()
         expected = '{"id": 1, "user": 1, "logs": [1], "profile_picture": "", "twitter": "", "facebook": "", "website": ""}'
