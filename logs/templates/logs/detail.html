@@ -27,7 +27,7 @@
         {% csrf_token %}
         <input name="log" value="{{ log.id }}" class="hidden"/>
         <input type="text" class="workout-name-input form-control" name="workout" value="{{ workout.name }}" placeholder="Name"/>
-        <input type="text" name="set" id="sets" value="{{ workout.sets }}" placeholder="Sets"/>
+        <input type="text" name="sets" id="sets" value="{{ workout.sets }}" placeholder="Sets"/>
         <input type="text" name="reps" id="reps" value="{{ workout.reps }}" placeholder="Reps Per Set"/>
         <input class="btn btn-primary add-workout-btn" type="submit" name="submit" value="Add Workout" />
       </form>
