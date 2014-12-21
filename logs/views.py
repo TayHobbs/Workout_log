@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from rest_framework import generics
+from rest_framework import viewsets
 
 from logs.forms import UserForm
 from logs.models import Workout, Log, UserProfile
@@ -39,7 +39,7 @@ def signup(request):
             new_user = authenticate(username=form.cleaned_data["username"],
                                     password=form.cleaned_data["password"])
             login(request, new_user)
-            return HttpResponseRedirect("/logs/")
+            return HttpResponseRedirect(reverse("logs"))
     else:
         form = UserForm()
     return render_to_response(
@@ -57,7 +57,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect("/logs")
+                return HttpResponseRedirect(reverse("logs"))
             else:
                 return HttpResponse("Your account is disabled")
         else:
@@ -74,7 +74,7 @@ def detail(request, log_id):
         except:
             return render(request, "errors/404.html")
     else:
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect(reverse("index"))
 
 
 def add_to_log(request):
@@ -95,7 +95,7 @@ def create_new_log(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect(reverse("index"))
 
 
 @login_required
@@ -107,38 +107,21 @@ def user_profile(request):
         return render("errors/404.html")
 
 
-class LogList(generics.ListCreateAPIView):
+class LogViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Log.objects.all()
     serializer_class = LogSerializer
 
 
-class LogDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Log.objects.all()
-    serializer_class = LogSerializer
-
-class UserProfileList(generics.ListCreateAPIView):
+class UserProfileViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
 
 
-class UserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = UserProfile.objects.all()
-    serializer_class = UserProfileSerializer
-
-class WorkoutList(generics.ListCreateAPIView):
+class WorkoutViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Workout.objects.all()
     serializer_class = WorkoutSerializer
 
 
-class WorkoutDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Workout.objects.all()
-    serializer_class = WorkoutSerializer
-
-class UserList(generics.ListCreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
