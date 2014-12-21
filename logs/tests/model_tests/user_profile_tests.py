@@ -15,8 +15,8 @@ class UserProfileTests(TestCase):
 
     def test_profile_has_logs(self):
         self.client.login(username="test.user", password="asdf")
-        log_one = Log.objects.create(user=self.user, name="Log one")
-        log_two = Log.objects.create(user=self.user, name="Log two")
+        log_one = Log.objects.create(name="Log one")
+        log_two = Log.objects.create(name="Log two")
         self.profile.logs.add(log_one, log_two)
         self.profile.save()
         profile = UserProfile.objects.get(pk=1)

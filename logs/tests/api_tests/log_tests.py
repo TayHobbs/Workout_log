@@ -16,7 +16,7 @@ class LogAPITests(TestCase):
     def setUp(self):
         self.workout = Workout.objects.create(name="New Workout", sets=3, reps=5)
         self.user = User.objects.create_user(username="test.user", password="asdf")
-        self.log = Log.objects.create(user=self.user, name="New Log", date=datetime.date(2013, 12, 02))
+        self.log = Log.objects.create(name="New Log", date=datetime.date(2013, 12, 02))
         self.log.workouts.add(self.workout)
         self.log.save()
         self.profile = UserProfile.objects.create(user=self.user)

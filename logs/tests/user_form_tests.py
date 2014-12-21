@@ -15,5 +15,5 @@ class UserFormTests(TestCase):
         )
         self.assertTrue(form.is_valid())
         user = form.save()
-        data_user = User.objects.get(pk=2)
+        data_user = User.objects.get(pk=1)
         self.assertEqual(data_user, user)

@@ -4,7 +4,7 @@ from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
-from logs.models import Log
+from logs.models import Log, UserProfile
 
 
 class AddToLogViewTests(TestCase):
@@ -12,10 +12,11 @@ class AddToLogViewTests(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
         self.client = Client()
-        self.user = User.objects.create_user(username="test.user", password="asdf")
+        self.user = UserProfile.objects.create(user=User.objects.create_user(username="test.user", password="asdf"))
 
     def test_workout_is_added_to_log(self):
-        log = Log.objects.create(user=self.user, name="New Log")
+        log = Log.objects.create(name="New Log")
+        self.user.logs.add(log)
         data = {"workout": "New Workout", "sets": 3, "reps": 5, "log": log.pk}
         self.client.login(username="test.user", password="asdf")
         response = self.client.post(reverse("add_to_log"), data, follow=True)

@@ -20,7 +20,7 @@ def index(request):
 
 def logs(request):
     if request.user.is_authenticated():
-        logs = Log.objects.filter(user=request.user).order_by("-date")
+        logs = UserProfile.objects.get(user=request.user).logs.all().order_by("-date")
         return render(request, "logs/logs.html", {"logs": logs})
     else:
         return HttpResponse("You are not signed in")
@@ -83,10 +83,12 @@ def add_to_log(request):
 
 
 def create_new_log(request):
+    profile = UserProfile.objects.get(user=request.user)
     workout = Workout.create(request.POST["workout"], request.POST["sets"], request.POST["reps"])
     workout.save()
-    log = Log.objects.create(user=request.user, name=request.POST["log"])
+    log = Log.objects.create(name=request.POST["log"])
     log.workouts.add(workout)
+    profile.logs.add(log)
     return HttpResponseRedirect(reverse("logs"))
 
 

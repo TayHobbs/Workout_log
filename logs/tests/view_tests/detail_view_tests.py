@@ -4,7 +4,7 @@ from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
-from logs.models import Log, Workout
+from logs.models import Log, Workout, UserProfile
 
 
 class DetailViewTests(TestCase):
@@ -12,10 +12,11 @@ class DetailViewTests(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
         self.client = Client()
-        self.user = User.objects.create_user(username="test.user", password="asdf")
+        self.user = UserProfile.objects.create(user=User.objects.create_user(username="test.user", password="asdf"))
 
     def test_user_must_be_logged_in_to_see_detail(self):
-        Log.objects.create(user=self.user, name="New Log")
+        log = Log.objects.create(name="New Log")
+        self.user.logs.add(log)
         response = self.client.get(reverse("detail", args=[1]), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "logs/index.html")
@@ -28,7 +29,8 @@ class DetailViewTests(TestCase):
 
     def test_shows_log_when_user_logged_in_and_log_exists(self):
         self.client.login(username="test.user", password="asdf")
-        Log.objects.create(user=self.user, name="New Log")
+        log = Log.objects.create(name="New Log")
+        self.user.logs.add(log)
         response = self.client.get(reverse("detail", args=[1]))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["log"].name, "New Log")
@@ -37,9 +39,10 @@ class DetailViewTests(TestCase):
         self.client.login(username="test.user", password="asdf")
         workout = Workout.create("New Workout", 3, 5)
         workout.save()
-        log = Log.objects.create(user=self.user, name="New Log")
+        log = Log.objects.create(name="New Log")
         log.workouts.add(workout)
         log.save()
+        self.user.logs.add(log)
         response = self.client.get(reverse("detail", args=[1]))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["log"].workouts.all()), 1)

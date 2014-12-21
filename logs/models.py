@@ -22,7 +22,6 @@ class Log(models.Model):
     date = models.DateField(default=datetime.now, blank=True)
     name = models.CharField(max_length=30)
     workouts = models.ManyToManyField(Workout)
-    user = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.name
@@ -30,7 +29,7 @@ class Log(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    logs = models.ManyToManyField(Log, blank=True)
+    logs = models.ManyToManyField(Log, related_name="profile", blank=True)
     profile_picture = models.ImageField(upload_to='profile_images', blank=True)
     twitter = models.URLField(blank=True)
     facebook = models.URLField(blank=True)
