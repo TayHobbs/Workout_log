@@ -8,13 +8,11 @@
 {% block body_block %}
   <div id="container">
     <h6 class="your-logs">Your Logs:</h6>
-    <div class="col-md-8 col-md-offset-2">
-        {% for log in logs %}
-          <div class="log">
-            <h3 class="log-name"><a href="{% url "detail" log.id %}">{{ log.name }}</a></h3>
-            <div class="log-date">{{ log.date }}</div>
-          </div>
-        {% endfor %}
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2 logs">
+          <input type="search" placeholder="Search" class="search">
+        {% include "logs/_log_list.html" with logs=logs %}
+      </div>
     </div>
   </div>
 {% endblock %}

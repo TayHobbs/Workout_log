@@ -13,6 +13,7 @@ from logs.forms import UserForm
 from logs.models import Workout, Log, UserProfile
 from logs.serializers import LogSerializer, UserProfileSerializer, WorkoutSerializer
 from logs.logging.current_logs import CurrentLogs
+from logs.logging.search import Search
 
 
 class Logs(View):
@@ -106,6 +107,16 @@ class Profile(View):
             return render(request, "logs/profile.html", {"profile": profile})
         except:
             return render("errors/404.html")
+
+
+class SearchLogs(View):
+
+    def get(self, request):
+        profile = UserProfile.objects.get(user=request.user)
+        context = RequestContext(request)
+        search = request.GET['suggestion']
+        logs = Search().search_logs(profile, 8, search)
+        return render_to_response('logs/_log_list.html', {'logs': logs}, context)
 
 
 @login_required

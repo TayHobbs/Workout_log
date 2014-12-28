@@ -20,6 +20,7 @@ urlpatterns = patterns(
     url("^logs/(?P<log_id>\d+)/$", Detail.as_view(), name="detail"),
     url("^create_new_log/$", CreateNewLog.as_view(), name="create"),
     url("^add_to_log/$", AddToLog.as_view(), name="add_to_log"),
+    url("^search/$", SearchLogs.as_view(), name="search"),
     url(r'api/workout_api', WorkoutAPIView.as_view(), name="workout_api"),
     url(r"^profile/$", Profile.as_view(), name="profile"),
 )
