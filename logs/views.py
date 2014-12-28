@@ -7,11 +7,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.views.generic import View
 
-from rest_framework import viewsets
+from rest_framework import viewsets, generics, filters
 
 from logs.forms import UserForm
 from logs.models import Workout, Log, UserProfile
-from logs.serializers import LogSerializer, UserSerializer, UserProfileSerializer, WorkoutSerializer
+from logs.serializers import LogSerializer, UserProfileSerializer, WorkoutSerializer
 from logs.logging.current_logs import CurrentLogs
 
 
@@ -128,11 +128,8 @@ class UserProfileViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserProfileSerializer
 
 
-class WorkoutViewSet(viewsets.ReadOnlyModelViewSet):
+class WorkoutAPIView(generics.ListAPIView):
     queryset = Workout.objects.all()
     serializer_class = WorkoutSerializer
-
-
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'sets')
