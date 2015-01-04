@@ -108,6 +108,13 @@ class Profile(View):
         except:
             return render("errors/404.html")
 
+    def post(self, request):
+        profile = UserProfile.objects.get(user=request.user)
+        if request.FILES:
+            profile.profile_picture = request.FILES["image"]
+            profile.save()
+        return render(request, "logs/profile.html", {"profile": profile})
+
 
 class SearchLogs(View):
 
