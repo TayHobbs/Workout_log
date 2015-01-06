@@ -4,23 +4,25 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.views.generic import View
 
 from rest_framework import viewsets, generics, filters
 
 from logs.forms import UserForm
 from logs.models import Workout, Log, UserProfile
-from logs.serializers import LogSerializer, UserProfileSerializer, WorkoutSerializer
+from logs.serializers import (
+    LogSerializer, UserProfileSerializer, WorkoutSerializer)
 from logs.logging.current_logs import CurrentLogs
 from logs.logging.search import Search
+from logs.logging.profile import ProfileNotFound
 
 
 class Logs(View):
 
     def get(self, request):
         if request.user.is_authenticated():
-            logs = UserProfile.objects.get(user=request.user).logs.all().order_by("-date")
+            logs = UserProfile.objects.get(
+                user=request.user).logs.all().order_by("-date")
             return render(request, "logs/logs.html", {"logs": logs})
         else:
             return HttpResponse("You are not signed in")
@@ -42,10 +44,19 @@ class Signup(View):
                                         password=form.cleaned_data["password"])
                 login(request, new_user)
                 return HttpResponseRedirect(reverse("logs"))
-        return render_to_response("logs/signup.html", {"user_form": form, "registered": registered}, context)
+        return render_to_response(
+            "logs/signup.html",
+            {
+                "user_form": form,
+                "registered": registered
+            },
+            context
+        )
 
     def get(self, request):
-        return render_to_response("logs/signup.html", {"user_form": UserForm()})
+        return render_to_response(
+            "logs/signup.html", {"user_form": UserForm()}
+        )
 
 
 class UserLogin(View):
@@ -91,7 +102,11 @@ class CreateNewLog(View):
 
     def post(self, request):
         profile = UserProfile.objects.get(user=request.user)
-        workout = Workout.create(request.POST["workout"], request.POST["sets"], request.POST["reps"])
+        workout = Workout.create(
+            request.POST["workout"],
+            request.POST["sets"],
+            request.POST["reps"]
+        )
         workout.save()
         log = Log.objects.create(name=request.POST["log"])
         log.workouts.add(workout)
@@ -121,9 +136,11 @@ class SearchLogs(View):
     def get(self, request):
         profile = UserProfile.objects.get(user=request.user)
         context = RequestContext(request)
-        search = request.GET['suggestion']
+        search = request.GET["suggestion"]
         logs = Search().search_logs(profile, 8, search)
-        return render_to_response('logs/_log_list.html', {'logs': logs}, context)
+        return render_to_response(
+            "logs/_log_list.html", {"logs": logs}, context
+        )
 
 
 @login_required

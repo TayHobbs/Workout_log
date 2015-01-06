@@ -8,7 +8,15 @@ from logs.models import Log, Workout, UserProfile
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ("id", "user", "logs", "profile_picture", "twitter", "facebook", "website")
+        fields = (
+            "id",
+            "user",
+            "logs",
+            "profile_picture",
+            "twitter",
+            "facebook",
+            "website"
+        )
 
 
 class LogSerializer(serializers.ModelSerializer):
