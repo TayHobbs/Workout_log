@@ -8,7 +8,7 @@
       <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
       <title>Workout Logger</title>
     </head>
-    
+
     {% block nav %}
       <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
@@ -22,17 +22,19 @@
             <a class="logo" href="{% url "index" %}">Workout Logger</a>
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right links">
-              <li>{% block nav_logs %}<a href="{% url "logs" %}">Logs</a>{% endblock %}</li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Create Log <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#" data-toggle="modal" data-target="#create-new-log">Create New Log</a></li>
-                  <li><a href="#" data-toggle="modal" data-target="#add-to-log">Add to Existing Log</a></li>
-                </ul>
-              <li><a href="{% url "logout" %}">Logout</a></li>
-              </li>
-            </ul>
+            {% if user.is_authenticated %}
+              <ul class="nav navbar-nav navbar-right links">
+                <li>{% block nav_logs %}<a href="{% url "logs" %}">Logs</a>{% endblock %}</li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Create Log <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#" data-toggle="modal" data-target="#create-new-log">Create New Log</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#add-to-log">Add to Existing Log</a></li>
+                  </ul>
+                <li><a href="{% url "logout" %}">Logout</a></li>
+                </li>
+              </ul>
+            {% endif %}
           </div>
         </div>
       </nav>
