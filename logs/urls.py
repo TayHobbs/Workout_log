@@ -22,5 +22,6 @@ urlpatterns = patterns(
     url("^add_to_log/$", AddToLog.as_view(), name="add_to_log"),
     url("^search/$", SearchLogs.as_view(), name="search"),
     url(r'api/workout_api', WorkoutAPIView.as_view(), name="workout_api"),
-    url(r"^profile/$", Profile.as_view(), name="profile"),
+    url(r"^account/$", Account.as_view(), name="account"),
+    url(r"^user/(?P<username>[\w.@+-]+)/$", Profile.as_view(), name="profile"),
 )

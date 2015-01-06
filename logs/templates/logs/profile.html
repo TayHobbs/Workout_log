@@ -9,11 +9,3 @@ Info:
 {% if profile.profile_picture %}
   <img src="{{profile.profile_picture.url}}" alt="{{profile.user.first_name}}'s Profile Picture">
 {% endif %}
-
-<br>
-
-<form action="{% url "profile" %}" method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  <input type="FILE" name="image">
-  <button type="submit">Upload</button>
-</form>

@@ -114,21 +114,28 @@ class CreateNewLog(View):
         return HttpResponseRedirect(reverse("logs"))
 
 
-class Profile(View):
+class Account(View):
 
     def get(self, request):
-        try:
-            profile = UserProfile.objects.get(user=request.user)
-            return render(request, "logs/profile.html", {"profile": profile})
-        except:
-            return render("errors/404.html")
+        account = UserProfile.objects.get(user=request.user)
+        return render(request, "logs/account.html", {"account": account})
 
     def post(self, request):
-        profile = UserProfile.objects.get(user=request.user)
+        account = UserProfile.objects.get(user=request.user)
         if request.FILES:
-            profile.profile_picture = request.FILES["image"]
-            profile.save()
-        return render(request, "logs/profile.html", {"profile": profile})
+            account.profile_picture = request.FILES["image"]
+            account.save()
+        return render(request, "logs/account.html", {"account": account})
+
+
+class Profile(View):
+
+    def get(self, request, username):
+        try:
+            profile = UserProfile.objects.get(user__username=username)
+            return render(request, "logs/profile.html", {"profile": profile})
+        except ProfileNotFound:
+            return render(request, "errors/404.html")
 
 
 class SearchLogs(View):

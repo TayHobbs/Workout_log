@@ -1,0 +1,16 @@
+Info:
+{{ account.user.username }}
+{{ account.user.first_name }}
+{{ account.user.last_name }}
+{{ account.user.email }}
+{% if account.account_picture %}
+  <img src="{{account.account_picture.url}}" alt="{{account.user.first_name}}'s account Picture">
+{% endif %}
+
+<br>
+<h3>Change account Pic</h3>
+<form action="{% url "account" %}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <input type="FILE" name="image">
+  <button type="submit">Upload</button>
+</form>
