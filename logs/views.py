@@ -31,8 +31,6 @@ class Logs(View):
 class Signup(View):
 
     def post(self, request):
-        context = RequestContext(request)
-        registered = False
         if request.method == "POST":
             form = UserForm(request.POST)
             if form.is_valid():
@@ -44,18 +42,13 @@ class Signup(View):
                                         password=form.cleaned_data["password"])
                 login(request, new_user)
                 return HttpResponseRedirect(reverse("logs"))
-        return render_to_response(
-            "logs/signup.html",
-            {
-                "user_form": form,
-                "registered": registered
-            },
-            context
-        )
+            else:
+                return self.get(request, form)
+        return self.get(request)
 
-    def get(self, request):
+    def get(self, request, form=UserForm()):
         return render_to_response(
-            "logs/signup.html", {"user_form": UserForm()}
+            "logs/signup.html", {"user_form": form}
         )
 
 
@@ -70,9 +63,11 @@ class UserLogin(View):
                 login(request, user)
                 return HttpResponseRedirect(reverse("logs"))
             else:
-                return HttpResponse("Your account is disabled")
+                error = "Your account is disabled"
+                return render(request, "logs/login.html", {"error": error})
         else:
-            return render(request, "logs/login.html")
+                error = "Invalid login details"
+                return render(request, "logs/login.html", {"error": error})
 
     def get(self, request):
         return render(request, "logs/login.html")

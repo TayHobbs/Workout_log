@@ -16,6 +16,13 @@
           </div>
         {% endif %}
         <div class="modal-body">
+        {% if error %}
+          <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{ error }}
+          </div>
+        {% endif %}
         {% if user.is_authenticated %}
           <h3>You're already signed in!</h3>
           <a href="{% url "logs" %}">Create a Log</a>
