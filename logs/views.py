@@ -14,7 +14,7 @@ from logs.serializers import (
     LogSerializer, UserProfileSerializer, WorkoutSerializer)
 from logs.logging.current_logs import CurrentLogs
 from logs.logging.search import Search
-from logs.logging.profile import ProfileNotFound
+from logs.logging.profile import ProfileNotFound, ProfileManager
 
 
 class Logs(View):
@@ -116,6 +116,9 @@ class CreateNewLog(View):
 
 class Account(View):
 
+    def __init__(self):
+        self.account_manager = ProfileManager()
+
     def get(self, request):
         account = UserProfile.objects.get(user=request.user)
         return render(request, "logs/account.html", {"account": account})
@@ -123,8 +126,10 @@ class Account(View):
     def post(self, request):
         account = UserProfile.objects.get(user=request.user)
         if request.FILES:
-            account.profile_picture = request.FILES["image"]
-            account.save()
+            self.account_manager.change_profile_pic(
+                account,
+                request.FILES["image"]
+            )
         return render(request, "logs/account.html", {"account": account})
 
 
