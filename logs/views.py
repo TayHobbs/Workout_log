@@ -12,7 +12,7 @@ from logs.forms import UserForm
 from logs.models import Workout, Log, UserProfile
 from logs.serializers import (
     LogSerializer, UserProfileSerializer, WorkoutSerializer)
-from logs.logging.current_logs import CurrentLogs, LogNotFound
+from logs.logging.current_logs import CurrentLogs
 from logs.logging.search import Search
 from logs.logging.profile import ProfileNotFound, ProfileManager
 
@@ -85,7 +85,7 @@ class Detail(View):
             try:
                 log = Log.objects.get(pk=log_id)
                 return render(request, "logs/detail.html", {"log": log})
-            except LogNotFound:
+            except:
                 return render(request, "errors/404.html")
         else:
             return HttpResponseRedirect(reverse("index"))

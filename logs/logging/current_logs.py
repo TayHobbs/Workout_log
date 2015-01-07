@@ -1,10 +1,6 @@
 from logs.models import Log, Workout
 
 
-class LogNotFound(Exception):
-    pass
-
-
 class CurrentLogs(object):
 
     def add_to_existing_log(self, request):
