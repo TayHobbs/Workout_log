@@ -1,6 +1,4 @@
-from django.test.client import RequestFactory
 from django.test import TestCase
-from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
@@ -10,8 +8,6 @@ from logs.models import Log, UserProfile
 class AddToLogViewTests(TestCase):
 
     def setUp(self):
-        self.factory = RequestFactory()
-        self.client = Client()
         self.user = UserProfile.objects.create(user=User.objects.create_user(username="test.user", password="asdf"))
 
     def test_workout_is_added_to_log(self):

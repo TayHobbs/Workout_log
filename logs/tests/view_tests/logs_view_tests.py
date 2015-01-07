@@ -1,8 +1,6 @@
 import datetime
 
-from django.test.client import RequestFactory
 from django.test import TestCase
-from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
@@ -12,8 +10,6 @@ from logs.models import Log, UserProfile
 class LogsViewTests(TestCase):
 
     def setUp(self):
-        self.factory = RequestFactory()
-        self.client = Client()
         self.user = UserProfile.objects.create(user=User.objects.create_user(username="test.user", password="asdf"))
 
     def test_logs_view_when_user_is_not_logged_in(self):
