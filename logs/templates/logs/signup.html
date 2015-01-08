@@ -11,14 +11,6 @@
 {% block body_block %}
   <div id="container">
     <div class="modal-dialog">
-      {% if signed_in %}
-        <div class="modal-content">
-          <div class="modal-body">
-              <h3>You're already signed in!</h3>
-              <a href="{% url "logs" %}">Create a Log</a>
-          </div>
-        </div>
-      {% else %}
       <div class="modal-content">
         {% if not user.is_authenticated %}
           <div class="modal-header">
@@ -26,7 +18,7 @@
           </div>
         {% endif %}
         <div class="modal-body">
-          {% if not user.is_authenticated %}
+          {% if user.is_authenticated %}
             <h3>You're already signed in!</h3>
             <a href="{% url "logs" %}">Create a Log</a>
           {% else %}
@@ -52,7 +44,6 @@
           {% endif %}
         </div>
       </div>
-    {% endif %}
     </div>
   </div>
 {% endblock %}

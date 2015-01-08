@@ -47,14 +47,9 @@ class Signup(View):
         return self.get(request)
 
     def get(self, request, form=UserForm()):
-        if request.user.is_authenticated():
-            return render_to_response(
-                "logs/signup.html", {"signed_in": True}
-            )
-        else:
-            return render_to_response(
-                "logs/signup.html", {"user_form": form}
-            )
+        return render_to_response(
+            "logs/signup.html", {"user_form": form}, RequestContext(request)
+        )
 
 
 class UserLogin(View):
