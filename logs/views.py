@@ -134,7 +134,8 @@ class Profile(View):
     def get(self, request, username):
         try:
             profile = UserProfile.objects.get(user__username=username)
-            return render(request, "logs/profile.html", {"profile": profile})
+            logs = profile.logs.all()[:5]
+            return render(request, "logs/profile.html", {"profile": profile, "logs": logs})
         except ProfileNotFound:
             return render(request, "errors/404.html")
 
