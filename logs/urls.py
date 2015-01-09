@@ -24,4 +24,8 @@ urlpatterns = patterns(
     url(r'api/workout_api', WorkoutAPIView.as_view(), name="workout_api"),
     url(r"^account/$", Account.as_view(), name="account"),
     url(r"^user/(?P<username>[\w.@+-]+)/$", Profile.as_view(), name="profile"),
+    url(r"^forgot_password/$", ForgotPassword.as_view(),
+        name="forgot_password"),
+    url(r"^account/reset-password/(?P<email>[\w.@+-]+)/$",
+        ResetPassword.as_view(), name="reset_password"),
 )

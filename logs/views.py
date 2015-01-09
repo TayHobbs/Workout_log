@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.generic import View
+from django.contrib.auth.models import User
 
 from rest_framework import viewsets, generics, filters
 
@@ -147,6 +148,34 @@ class SearchLogs(View):
         logs = Search().search_logs(profile, 8, search)
         return render_to_response(
             "logs/_log_list.html", {"logs": logs}, context
+        )
+
+
+class ForgotPassword(View):
+
+    def get(self, request):
+        return render(request, "logs/forgotten_password.html")
+
+    def post(self, request):
+        try:
+            user = User.objects.get(email=request.POST["email"])
+            ProfileManager().send_forgotten_password_email(user)
+        except:
+            return render(
+                request, "logs/forgotten_password.html",
+                {"email_not_found": True}
+            )
+        return render(
+            request, "logs/forgotten_password.html", {"email_sent": True})
+
+
+class ResetPassword(View):
+
+    def get(self, request, email):
+        user, new_password = ProfileManager().reset_password(email)
+        return render(
+            request, "logs/reset_password.html",
+            {"user": user, "new_password": new_password}
         )
 
 
