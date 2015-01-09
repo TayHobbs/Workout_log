@@ -10,7 +10,9 @@ from logs.models import Log, UserProfile
 class LogsViewTests(TestCase):
 
     def setUp(self):
-        self.user = UserProfile.objects.create(user=User.objects.create_user(username="test.user", password="asdf"))
+        self.user = UserProfile.objects.create(
+            user=User.objects.create_user(
+                username="test.user", password="asdf"))
 
     def test_logs_view_when_user_is_not_logged_in(self):
         response = self.client.get(reverse("logs"))
@@ -33,7 +35,8 @@ class LogsViewTests(TestCase):
 
     def test_logs_are_ordered_by_date(self):
         self.client.login(username="test.user", password="asdf")
-        log_one = Log.objects.create(name="Second Log", date=datetime.date(2013, 12, 02))
+        log_one = Log.objects.create(
+            name="Second Log", date=datetime.date(2013, 12, 02))
         log_two = Log.objects.create(name="First Log")
         self.user.logs.add(log_one, log_two)
         response = self.client.get(reverse("logs"))

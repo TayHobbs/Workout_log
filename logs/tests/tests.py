@@ -8,7 +8,9 @@ from logs.logging.current_logs import CurrentLogs
 class AddToExistingLogTests(TestCase):
 
     def setUp(self):
-        self.user = UserProfile.objects.create(user=User.objects.create_user(username="test.user", password="asdf"))
+        self.user = UserProfile.objects.create(
+            user=User.objects.create_user(
+                username="test.user", password="asdf"))
         self.log = Log.objects.create(name="New Log")
         self.user.logs.add(self.log)
 
@@ -22,7 +24,9 @@ class AddToExistingLogTests(TestCase):
 class CreateLogsTests(TestCase):
 
     def setUp(self):
-        self.user = UserProfile.objects.create(user=User.objects.create_user(username="test.user", password="asdf"))
+        self.user = UserProfile.objects.create(
+            user=User.objects.create_user(
+                username="test.user", password="asdf"))
 
     def test_log_can_have_multiple_workouts(self):
         workout_one = Workout.create("Bench", 3, 5)

@@ -8,8 +8,9 @@ from logs.models import UserProfile
 class MyAccountViewTests(TestCase):
 
     def setUp(self):
-        self.user = User.objects.create_user(username="test.user", password="asdf")
-        self.profile = UserProfile.objects.create(user=self.user)
+        self.user = UserProfile.objects.create(
+            user=User.objects.create_user(
+                username="test.user", password="asdf"))
 
     def test_account_name_is_shown_on_account_page(self):
         self.client.login(username="test.user", password="asdf")

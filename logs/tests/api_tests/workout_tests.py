@@ -12,8 +12,10 @@ from logs.serializers import WorkoutSerializer
 class WorkoutAPITests(TestCase):
 
     def setUp(self):
-        self.workout = Workout.objects.create(name="New Workout", sets=3, reps=5)
-        self.user = User.objects.create_user(username="test.user", password="asdf")
+        self.workout = Workout.objects.create(
+            name="New Workout", sets=3, reps=5)
+        self.user = User.objects.create_user(
+            username="test.user", password="asdf")
         self.log = Log.objects.create(name="New Log")
         self.log.workouts.add(self.workout)
         self.log.save()
