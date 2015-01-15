@@ -4,12 +4,12 @@ TEMPLATE_DEBUG = DEBUG = True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'workout_logger',
-        'USER': 'taylor.hobbs',
-        'PASSWORD': 'asdf',
+        'USER': 'workout_user',
+        'PASSWORD': 'password1',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '5432',
     }
 }
 
