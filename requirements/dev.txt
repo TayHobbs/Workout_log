@@ -1,6 +1,23 @@
-django<1.7
-flake8
-bpython
-djangorestframework<3.0
-markdown
-django-filter
+Django==1.6.8                                                                                                                                                    │Validating models...
+Markdown==2.5.2                                                                                                                                                  │
+Pillow==2.6.1                                                                                                                                                    │January 14, 2015 - 22:2
+PyJWT==0.3.2                                                                                                                                                     │6:14
+Pygments==2.0.1                                                                                                                                                  │Django version 1.6.8, u
+South==1.0.1                                                                                                                                                     │sing settings 'workout_
+bpython==0.13.1                                                                                                                                                  │log.settings.production
+django-filter==0.9.1                                                                                                                                             │'
+django-nose==1.3                                                                                                                                                 │Starting development se
+django-smtp-ssl==1.0                                                                                                                                             │rver at http://127.0.0.
+djangorestframework==2.4.0                                                                                                                                       │1:8000/
+flake8==2.2.5                                                                                                                                                    │Quit the server with CO
+mccabe==0.2.1                                                                                                                                                    │NTROL-C.
+nose==1.3.4                                                                                                                                                      │Validating models...
+pep8==1.5.7                                                                                                                                                      │0 errors found
+psycopg2==2.5.4                                                                                                                                                  │January 14, 2015 - 22:2
+pyflakes==0.8.1                                                                                                                                                  │6:52
+python-openid==2.2.5                                                                                                                                             │Django version 1.6.8, u
+requests==2.5.0                                                                                                                                                  │log.settings.production
+requests-oauthlib==0.4.2                                                                                                                                         │'
+six==1.8.0                                                                                                                                                       │Starting development se
+w3lib==1.10.0                                                                                                                                                    │rver at http://127.0.0.
+wsgiref==0.1.2
