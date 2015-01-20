@@ -1,3 +1,4 @@
+import json
 from django.template import RequestContext
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
@@ -14,6 +15,7 @@ from logs.models import Workout, Log, UserProfile
 from logs.serializers import (
     LogSerializer, UserProfileSerializer, WorkoutSerializer)
 from logs.logging.current_logs import CurrentLogs
+from logs.logging.previous_workouts import PreviousWorkouts
 from logs.logging.search import Search
 from logs.logging.profile import ProfileNotFound, ProfileManager
 
@@ -88,6 +90,10 @@ class Detail(View):
 
 
 class AddToLog(View):
+
+    def get(self, request):
+        workouts = PreviousWorkouts().show_recently_used_workouts(request.user)
+        return HttpResponse(json.dumps(workouts), content_type="application/json")
 
     def post(self, request):
         log = CurrentLogs().add_to_existing_log(request.POST)

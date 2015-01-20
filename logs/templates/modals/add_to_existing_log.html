@@ -12,12 +12,17 @@
         <div class="modal-body">
           {% csrf_token %}
           <label for="workout">Workout Name:</label>
-          <input type="text" name="workout" id="workout" value="{{ workout.name }}" />
+          <input type="text" name="workout" id="existing-log-workout" />
           <label for="sets">Sets:</label>
-          <input type="text" name="sets" id="sets" value="{{ workout.sets }}" />
+          <input type="text" name="sets" id="existing-log-sets" />
           <label for="reps">Reps Per Set:</label>
-          <input type="text" name="reps" id="reps" value="{{ workout.reps }}" />
+          <input type="text" name="reps" id="existing-log-reps" />
         </div>
+        <table class="last-workouts">
+          <th>Name</th>
+          <th>Sets</th>
+          <th>Reps</th>
+        </table>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <input class="btn btn-primary" type="submit" name="submit" value="Add To Log" />

@@ -8,6 +8,7 @@ class Workout(models.Model):
     name = models.CharField(max_length=30)
     sets = models.PositiveIntegerField()
     reps = models.PositiveIntegerField()
+    last_date_added = models.DateField(auto_now=True, editable=True)
 
     def __unicode__(self):
         return self.name
